@@ -19,7 +19,7 @@ export default {
             serverPath: this.$store.state.serverPath
         }
     },
-    mounted(){
+   mounted(){
         axios.get(`${this.serverPath}/products?user_id=1`)
             .then(response => this.products = response.data)
     },

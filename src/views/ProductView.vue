@@ -3,7 +3,7 @@
     <div class="product-component">
       <ProductBox v-bind="product">
         <input type="number" v-model="number" /> &nbsp;&nbsp;
-        <button>加入購物車</button>
+        <button @click='addCart(product)'>加入購物車</button>
       </ProductBox>
     </div>
     <hr />
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       product: "",
+      number:0,
       serverPath: this.$store.state.serverPath,
     };
   },
@@ -30,6 +31,19 @@ export default {
       .get(`${this.serverPath}/products/${this.$route.params.productId}`)
       .then((response) => (this.product = response.data));
   },
+  methods:{
+      addCart: function(product){
+          if(product.quantity - this.number < 0){
+              alert('存貨不足')
+              return
+          }
+          this.$store.commit('addCart',{
+              product: product,
+              number: this.number
+          })
+          alert('add Cart')
+      }
+  }
 };
 </script>
 <style scoped>

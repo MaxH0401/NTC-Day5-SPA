@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ProductsView from '../views/ProductsView.vue'
+import ProductView from '../views/ProductView.vue'
 
 const routes = [
   {
@@ -7,6 +8,11 @@ const routes = [
     name: 'products',
     component: ProductsView
   },
+  {
+    path: '/products/:productId',
+    name: 'product',
+    component: ProductView
+  }//和ProductsView同階層是為了同吃navbar
 ]
 
 const router = createRouter({

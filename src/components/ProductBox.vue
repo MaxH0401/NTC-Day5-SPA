@@ -1,15 +1,15 @@
 <template>
-  <div class="product-box">
+  <div class="product-box" @click="redirectProduct(id)" >
     <div class="image-box">
       <img :src="parseImgPath(img_path)" />
     </div>
-    <!-- img_path是資料庫的key -->
-    <!-- :src要注意 -->
     <h4>
       {{ brand }} <small>{{ category }}</small>
     </h4>
     <h3>{{ name }}</h3>
     <p>售價: {{ price }}</p>
+    <slot></slot>
+    <!-- 給productview放資料的地方 -->
   </div>
 </template>
 
@@ -21,15 +21,20 @@ export default {
     };
   },
   props: {
+    'id':Number,
     'img_path': String,
     'brand': String,
     'category': String,
     'name': String,
     'price': Number,
+    // 這些都對應data資料
   },
   methods: {
     parseImgPath: function (path) {
       return this.serverPath + path;
+    },
+    redirectProduct: function (id) {
+      this.$router.push(`/products/${id}`);
     },
   },
 };

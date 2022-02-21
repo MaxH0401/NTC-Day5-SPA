@@ -1,12 +1,20 @@
 <template>
   <div id="nav">
     <router-link to="/products">產品清單</router-link>
-    <router-link to="/checkout">結帳(共有0個商品)</router-link>
+    <router-link to="/checkout"
+      >結帳(共有{{ currentQuantity }}個商品)</router-link
+    >
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    currentQuantity() {
+      return this.$store.getters.currentQuantity;
+    },
+  },
+};
 </script>
 
 <style scoped>
